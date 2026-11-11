@@ -43,6 +43,22 @@ class EmpleadoTest {
     }
 
     @Test
+    void reconstruyeEmpleadoConElIdentificadorExistente() {
+        UUID idExistente = UUID.fromString("11111111-2222-3333-4444-555555555555");
+
+        Empleado empleado = Empleado.reconstruir(
+                idExistente,
+                NOMBRE_VALIDO,
+                LEGAJO_VALIDO,
+                FECHA_INGRESO_VALIDA,
+                Puesto.ANALISTA,
+                new BigDecimal("500000")
+        );
+
+        assertEquals(idExistente, empleado.getId());
+    }
+
+    @Test
     void rechazaAtributosObligatoriosNulos() {
         assertThrows(AtributoEmpleadoObligatorioException.class,
                 () -> Empleado.crear(null, LEGAJO_VALIDO, FECHA_INGRESO_VALIDA,

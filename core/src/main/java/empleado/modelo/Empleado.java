@@ -46,6 +46,20 @@ public final class Empleado {
                 fechaIngreso, puesto, salario);
     }
 
+    public static Empleado reconstruir(UUID id, String nombreCompleto, String legajo,
+                                       LocalDate fechaIngreso, Puesto puesto, BigDecimal salario) {
+        if (id == null) {
+            throw new AtributoEmpleadoObligatorioException("El identificador del empleado es obligatorio");
+        }
+        validarAtributosObligatorios(nombreCompleto, legajo, fechaIngreso, puesto, salario);
+        validarNombre(nombreCompleto);
+        validarLegajo(legajo);
+        validarFechaIngreso(fechaIngreso);
+        validarSalario(puesto, salario);
+
+        return new Empleado(id, nombreCompleto.trim(), legajo, fechaIngreso, puesto, salario);
+    }
+
     private static void validarAtributosObligatorios(String nombreCompleto, String legajo,
                                                       LocalDate fechaIngreso, Puesto puesto,
                                                       BigDecimal salario) {
